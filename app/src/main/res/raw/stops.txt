@@ -1,0 +1,9 @@
+Delhi, 0, No
+Dubai, 2000, Yes
+London, 5500, No
+New York, 5600, Yes
+Phuket, 2000, No
+Beijing, 1000, Yes
+Paris, 4500, No
+Tokyo, 5000, No
+Quebec, 1500, No

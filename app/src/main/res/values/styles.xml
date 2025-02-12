@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="EmptyButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="strokeColor">@color/light_text</item>
+        <item name="rippleColor">@color/light_green</item>
+        <item name="android:textColor">@color/light_text</item>
+        <item name="cornerRadius">8dp</item>
+    </style>
+
+    <style name="SolidButton" parent="Widget.MaterialComponents.Button">
+        <item name="cornerRadius">8dp</item>
+        <item name="backgroundTint">@color/dark_text</item>
+        <item name="rippleColor">@color/light_grey_text </item>
+        <item name="android:textColor">@color/light_text</item>
+    </style>
+
+    <style name="ToolbarTitleStyle" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textSize">30sp</item> <!-- Adjust as needed -->
+        <item name="android:textColor">@color/light_text</item>
+    </style>
+
+
+</resources>
