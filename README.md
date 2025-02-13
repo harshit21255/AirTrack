@@ -34,42 +34,74 @@
 
 ### Kotlin Files
 - **`MainActivity.kt`**:
-  - The main activity that handles the UI and logic for tracking the journey.
-  - Reads stops from `stops.txt` and updates the UI dynamically.
+  - Contains the main Composable function `AirTrackApp()`
+  - Implements the entire UI using Jetpack Compose
+  - Handles state management for:
+    - Current stop tracking
+    - Distance unit conversion (km/mi)
+    - Progress calculation
+    - Journey statistics
+  - Contains the `StopItem` Composable for individual stop displays
+  - Includes the `StopsReader` object for data loading
 
 - **`Models.kt`**:
-  - Defines the `Stop` data class, which represents a stop with its name, distance from the previous stop, and visa requirement.
+  - Defines the `Stop` data class with properties:
+    - `name`: String - Name of the stop
+    - `distanceFromPrevious`: Double - Distance from the last stop
+    - `visaRequired`: Boolean - Visa requirement indicator
+    - `timeFromPrevious`: Int - Travel time from previous stop
 
-- **`StopAdapter.kt`**:
-  - Adapter for the RecyclerView that displays the list of stops.
-  - Handles lazy loading for journeys with more than 3 stops.
-  - Updates the UI based on the current stop and unit (km/mi).
+### Compose UI Components
+- **Main Screen Elements**:
+  - App header with title
+  - Progress bar showing journey completion
+  - Distance statistics (covered and remaining)
+  - Current stop card with highlighted border
+  - Unit toggle and next stop buttons
+  - Lazy scrolling list of stops
 
-### Layout Files
-- **`activity_main.xml`**:
-  - The main layout file that defines the UI for the app.
-  - Includes a progress bar, distance indicators, journey summary, and a RecyclerView for the stops list.
-
-- **`item_stop.xml`**:
-  - The layout file for each item in the stops list.
-  - Displays the stop name, distance from the previous stop, and visa requirement.
+- **Stop Item Component**:
+  - Individual stop cards with:
+    - Stop name and visa badge
+    - Distance and time information
+    - Color-coded status indicators
+    - Dynamic styling based on visit status
 
 ### Resource Files
 - **`res/raw/stops.txt`**:
-  - A text file containing the stops for the journey.
-  - Each line follows the format: `Stop Name, Distance From Previous, Visa Required (Yes or No)`.
+  - Contains journey data in CSV format
+  - Format: `StopName,DistanceFromPrevious,VisaRequired,TimeFromPrevious`
+  - Example:
+    ```
+    Delhi,0.0,false,0
+    Dubai,2000.0,true,4
+    London,5500.0,false,7
+    ```
 
-- **`res/values/colors.xml`**:
-  - Defines the color scheme for the app.
+### Theme and Styling
+- **Color Scheme**:
+  - `DarkBackground` (0xFF0F1316)
+  - `LightBackground` (0xFF122026)
+  - `DarkText` (0xFF3B4E56)
+  - `LightText` (0xFFD9EDDF)
+  - `Green` (0xFF23E09C)
+  - `Red` (0xFFDE5753)
 
-- **`res/values/styles.xml`**:
-  - Defines custom styles for buttons and the toolbar.
+### Data Management
+- **`StopsReader` Object**:
+  - Handles reading stop data from resources
+  - Provides fallback default stops
+  - Implements error handling for file operations
+  - Parses text data into Stop objects
 
-- **`res/values/strings.xml`**:
-  - Contains the app name as a string resource.
-
-- **`res/drawable/custom_progress_bar.xml`**:
-  - A custom drawable for the progress bar with rounded corners and a custom color scheme.
+### UI State Management
+- Uses Compose state management through:
+  - `remember` for storing stop data
+  - `mutableStateOf` for tracking:
+    - Current stop index
+    - Distance unit preference
+  - `LaunchedEffect` for scroll position updates
+  - `rememberLazyListState` for list scrolling
 
 ---
 
