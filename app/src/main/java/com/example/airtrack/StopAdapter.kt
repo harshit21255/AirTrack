@@ -25,7 +25,6 @@ class StopAdapter(
         notifyDataSetChanged()
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StopViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_stop, parent, false)
         return StopViewHolder(view)
@@ -42,6 +41,7 @@ class StopAdapter(
         private val stopName: TextView = itemView.findViewById(R.id.stopName)
         private val distanceFromPrevious: TextView = itemView.findViewById(R.id.distanceFromPrevious)
         private val visaRequired: TextView = itemView.findViewById(R.id.visaRequired)
+        private val timeFromPrevious: TextView = itemView.findViewById(R.id.timeFromPrevious)
 
         fun bind(stop: Stop, position: Int, currentStopIndex: Int, isKm: Boolean) {
             stopName.text = stop.name
@@ -51,46 +51,44 @@ class StopAdapter(
             } else {
                 stop.distanceFromPrevious * 0.621371
             }
-            distanceFromPrevious.text = "%.2f %s".format(distance, if (isKm) "km" else "mi")
+            distanceFromPrevious.text = "Distance: %.2f %s".format(distance, if (isKm) "km" else "mi")
+            timeFromPrevious.text = "Time: %d hrs".format(stop.timeFromPrevious)
 
             visaRequired.visibility = View.VISIBLE
             visaRequired.text = "VISA"
 
             val visaBoxBackground = GradientDrawable()
-            visaBoxBackground.cornerRadius = 8f.dpToPx(itemView.context) // 8dp corner radius
-            visaBoxBackground.setColor(ContextCompat.getColor(itemView.context, R.color.dark_background)) // Background color
+            visaBoxBackground.cornerRadius = 8f.dpToPx(itemView.context)
+            visaBoxBackground.setColor(ContextCompat.getColor(itemView.context, R.color.dark_background))
 
             visaRequired.background = visaBoxBackground
 
             when {
                 position < currentStopIndex -> {
-                    // visisted
                     stopName.setTextColor(ContextCompat.getColor(itemView.context, R.color.red))
                     distanceFromPrevious.setTextColor(ContextCompat.getColor(itemView.context, R.color.red))
+                    timeFromPrevious.setTextColor(ContextCompat.getColor(itemView.context, R.color.red))
                     visaRequired.setTextColor(ContextCompat.getColor(itemView.context, R.color.dark_background))
-                    visaBoxBackground.setColor(ContextCompat.getColor(itemView.context, R.color.red)) // Update Visa box background color
+                    visaBoxBackground.setColor(ContextCompat.getColor(itemView.context, R.color.red))
                 }
                 position == currentStopIndex -> {
-                    // current
                     stopName.setTextColor(ContextCompat.getColor(itemView.context, R.color.light_text))
                     distanceFromPrevious.setTextColor(ContextCompat.getColor(itemView.context, R.color.light_text))
+                    timeFromPrevious.setTextColor(ContextCompat.getColor(itemView.context, R.color.light_text))
                     visaRequired.setTextColor(ContextCompat.getColor(itemView.context, R.color.dark_background))
-                    visaBoxBackground.setColor(ContextCompat.getColor(itemView.context, R.color.light_text)) // Update Visa box background color
+                    visaBoxBackground.setColor(ContextCompat.getColor(itemView.context, R.color.light_text))
                 }
                 else -> {
-                    // unvisited
                     stopName.setTextColor(ContextCompat.getColor(itemView.context, R.color.light_grey_text))
                     distanceFromPrevious.setTextColor(ContextCompat.getColor(itemView.context, R.color.light_grey_text))
+                    timeFromPrevious.setTextColor(ContextCompat.getColor(itemView.context, R.color.light_grey_text))
                     visaRequired.setTextColor(ContextCompat.getColor(itemView.context, R.color.dark_background))
-                    visaBoxBackground.setColor(ContextCompat.getColor(itemView.context, R.color.light_grey_text)) // Update Visa box background color
+                    visaBoxBackground.setColor(ContextCompat.getColor(itemView.context, R.color.light_grey_text))
                 }
             }
             if (!stop.visaRequired) {
                 visaRequired.visibility = View.GONE
             }
-
-
-
         }
 
         private fun Float.dpToPx(context: Context): Float {

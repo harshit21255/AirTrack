@@ -69,11 +69,12 @@ class MainActivity : AppCompatActivity() {
         context.resources.openRawResource(R.raw.stops).bufferedReader().useLines { lines ->
             lines.forEach { line ->
                 val parts = line.split(",")
-                if (parts.size == 3) {
+                if (parts.size == 4) {
                     val name = parts[0].trim()
                     val distance = parts[1].trim().toDouble()
                     val visaRequired = parts[2].trim().equals("Yes", ignoreCase = true)
-                    stops.add(Stop(name, distance, visaRequired))
+                    val time = parts[3].trim().toInt()
+                    stops.add(Stop(name, distance, visaRequired, time))
                 }
             }
         }

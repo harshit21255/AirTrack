@@ -1,27 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"     xmlns:app="http://schemas.android.com/apk/res-auto"
+
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="8dp"
     android:background="@color/dark_background">
 
-    <!-- Horizontal layout for Stop Name and Visa Required -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical">
 
-        <!-- Stop Name -->
         <TextView
             android:id="@+id/stopName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="24sp"
-            android:paddingEnd="8dp" />
+            android:textSize="24sp" />
 
-        <!-- Visa Required Box -->
         <TextView
             android:id="@+id/visaRequired"
             android:layout_width="wrap_content"
@@ -32,12 +29,27 @@
             android:textColor="@color/dark_background" />
     </LinearLayout>
 
-    <!-- Distance From Previous -->
-    <TextView
-        android:id="@+id/distanceFromPrevious"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:layout_marginTop="4dp" />
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/distanceFromPrevious"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/timeFromPrevious"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>
