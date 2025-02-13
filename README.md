@@ -13,7 +13,7 @@
 
 2. **Dynamic Stops List**:
    - Loads stops from a text file (`stops.txt`).
-   - Displays stops in a list with their name, distance from the previous stop, and visa requirements.
+   - Displays stops in a list with their name, distance from the previous stop, time taken from the previous stop and visa requirements.
    - Implements lazy loading for journeys with more than 3 stops.
 
 3. **Visa Requirement Indicator**:
@@ -52,12 +52,12 @@
 
 - **`item_stop.xml`**:
   - The layout file for each item in the stops list.
-  - Displays the stop name, distance from the previous stop, and visa requirement.
+  - Displays the stop name, distance from the previous stop, time taken from the previous stop and visa requirement.
 
 ### Resource Files
 - **`res/raw/stops.txt`**:
   - A text file containing the stops for the journey.
-  - Each line follows the format: `Stop Name, Distance From Previous, Visa Required (Yes or No)`.
+  - Each line follows the format: `Stop Name, Distance From Previous, Visa Required (Yes or No), Time Taken From Previous`.
 
 - **`res/values/colors.xml`**:
   - Defines the color scheme for the app.
